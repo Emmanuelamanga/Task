@@ -21,7 +21,7 @@ class TaskController extends Controller
          * render them to the welcome view
          */
 
-        $tasks = Task::all(); // paginate / get / raw -> top 10 records basing on a certain filter
+        $tasks = Task::all(); // paginate / get / raw -> top 10 records basing on a certain filter 
 
         return view('welcome', ['tasks' => $tasks]);
 //        return view('welcome', compact('tasks'));
@@ -89,6 +89,6 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        // check on softdelete / hard delete 
     }
 }
