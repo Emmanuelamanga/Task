@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TaskController extends Controller
 {
@@ -49,6 +50,9 @@ class TaskController extends Controller
 
         // insert
         Task::create($validated);
+        Alert::success('Success', 'Ticket Created');
+//        Alert::toast('Toast Message', 'Toast Type');
+
 
 //        $task = new Task();
 //        $task->description = Str::upper($validated['description']);

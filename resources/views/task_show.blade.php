@@ -21,7 +21,7 @@
                 <form action="{{ route('task.destroy', $task->id)  }}" method="post">
                     @csrf
                     @method('delete')
-                    <button type="submit" class="ml-2 btn btn-danger btn-sm float-end">Delete</button>
+                    <button type="submit" class="ml-2 btn btn-danger btn-sm float-end" onclick="return confirm('Delete ?')">Delete</button>
                 </form>
                 <a href="{{ route('task.edit', $task->id)  }}" class="mr-2 btn btn-warning btn-sm float-end">Edit</a>
             </div>

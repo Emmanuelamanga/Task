@@ -13,7 +13,9 @@
 <body class="">
 
 <div class="container">
-    @if(\Session::has('success'))
+    @include('sweetalert::alert')
+
+@if(\Session::has('success'))
         <div class="alert alert-success">
             {!! \Session::get('success')  !!}
         </div>

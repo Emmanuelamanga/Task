@@ -19,7 +19,6 @@ use App\Http\Controllers\TaskController;
  */
 
 Route::get('/', [TaskController::class, 'index'])->name('task.index');
-Route::get('show-task/{task}', [TaskController::class, 'show'])->name('task.show');
 Route::get('create-task', [TaskController::class, 'create'])->middleware(['signed'])->name('task.create');
 Route::post('store-task', [TaskController::class, 'store'])->name('task.store');
 Route::get('show/task/{task}', [TaskController::class, 'show'])->name('task.show');
