@@ -102,5 +102,6 @@ class TaskController extends Controller
         ]);
 
         return redirect('/')->with('success', 'Task Deleted Successfully');
+
     }
 }
