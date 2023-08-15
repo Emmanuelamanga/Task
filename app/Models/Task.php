@@ -10,4 +10,9 @@ class Task extends Model
 {
     use HasFactory, softDeletes;
 
+    protected $primaryKey = 'id';
+//    protected $fillable =['description'];
+
+    protected $guarded = [];
+
 }

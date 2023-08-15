@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -46,8 +47,8 @@ class TaskController extends Controller
            'description' => 'required|string|min:3'
         ]);
 
-        // issert
-        Task::created($validated);
+        // insert
+        Task::create($validated);
 
 //        $task = new Task();
 //        $task->description = Str::upper($validated['description']);
@@ -65,7 +66,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('tast_show',['task' => $task]);
+        return view('task_show',['task' => $task]);
     }
 
     /**
@@ -73,7 +74,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return view('edit_task', compact('task'));
     }
 
     /**
@@ -81,7 +82,12 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $task->update($request->all());
+
+//        return redirect('show/task/'.$task->id)->with('success', "Task Updated Successfully");
+//        return redirect()->back()->with('success', "Task Updated Successfully");
+        return redirect()->route('task.show', $task->id)->with('success', "Task Updated Successfully");
+
     }
 
     /**
@@ -89,6 +95,12 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+//        $task->delete();
+//        $task->forceDelete();
+        DB::table('tasks')->where('id', $task->id)->update([
+            'deleted_at' => Carbon::now()
+        ]);
+
+        return redirect('/')->with('success', 'Task Deleted Successfully');
     }
 }

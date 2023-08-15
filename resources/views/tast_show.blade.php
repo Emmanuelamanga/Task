@@ -3,9 +3,6 @@
 @section('title', 'Show Task')
 
 @section('styles')
-    <style>
-
-    </style>
 @endsection
 
 @section('content')
@@ -14,8 +11,6 @@
         <br>
         {{ $task->created_at->diffForHumans()  }}
     </div>
-
-
 @endsection
 
 @section('scripts')
