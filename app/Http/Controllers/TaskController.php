@@ -25,6 +25,8 @@ class TaskController extends Controller
 
         $tasks = Task::all(); // paginate / get / raw -> top 10 records basing on a certain filter
 
+//        $tasks = DB::table('tasks')->whereNull('deleted_at')->get();
+
         return view('welcome', ['tasks' => $tasks]);
 //        return view('welcome', compact('tasks'));
     }
