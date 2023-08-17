@@ -25,3 +25,7 @@ Route::get('show/task/{task}', [TaskController::class, 'show'])->name('task.show
 Route::get('edit-task/{task}', [TaskController::class, 'edit'])->name('task.edit');
 Route::put('update-task/{task}/update', [TaskController::class, 'update'])->name('task.update');
 Route::delete('delete-task/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
+
+Auth::routes(); // authentication routes login register reset-password email-verify
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

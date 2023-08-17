@@ -18,13 +18,17 @@
             </div>
             <div class="card-footer">
                 {{ $task->created_at }}
-                <form action="{{ route('task.destroy', $task->id)  }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="ml-2 btn btn-danger btn-sm float-end" onclick="return confirm('Delete ?')">Delete</button>
-                </form>
-                <a href="{{ route('task.edit', $task->id)  }}" class="mr-2 btn btn-warning btn-sm float-end">Edit</a>
-            </div>
+                @auth
+                    @if(auth()->user()->id == $task->user_id)
+                        <form action="{{ route('task.destroy', $task->id)  }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="ml-2 btn btn-danger btn-sm float-end" onclick="return confirm('Delete ?')">Delete</button>
+                        </form>
+                        <a href="{{ route('task.edit', $task->id)  }}" class="mr-2 btn btn-warning btn-sm float-end">Edit</a>
+                    @endif
+                    @endauth
+               </div>
         </div>
 
     </div>

@@ -11,6 +11,7 @@
         @foreach($tasks as $task)
             <li class="list-group-item">
                 <a href="{{ route('task.show',$task) }}">{{ $task->id }} : {{ $task->description ?? 'No Description' }}</a>
+                <br> <span class="text-sm">Created By: {{ $task->user->name }}</span>
             </li>
         @endforeach
     </ul>

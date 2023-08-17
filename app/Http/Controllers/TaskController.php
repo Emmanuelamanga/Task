@@ -23,8 +23,7 @@ class TaskController extends Controller
          * render them to the welcome view
          */
 
-        $tasks = Task::all(); // paginate / get / raw -> top 10 records basing on a certain filter
-
+        $tasks = Task::with('user')->get(); // paginate / get / raw -> top 10 records basing on a certain filter
 //        $tasks = DB::table('tasks')->whereNull('deleted_at')->get();
 
         return view('welcome', ['tasks' => $tasks]);
@@ -50,6 +49,10 @@ class TaskController extends Controller
            'description' => 'required|string|min:3'
         ]);
 
+//        $validated['user_id'] = $request->user()->id;
+        $validated['user_id'] = auth()->user()->id;
+
+
         // insert
         Task::create($validated);
         Alert::success('Success', 'Ticket Created');
@@ -72,6 +75,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+
         return view('task_show',['task' => $task]);
     }
 
@@ -80,6 +84,11 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        if (!(auth()->user()->id == $task->user_id)){
+            Alert::warning('Not Authorised', 'You are not Authorised to Modify this task.');
+            return redirect()->route('task.index');
+        }
+
         return view('edit_task', compact('task'));
     }
 
